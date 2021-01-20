@@ -1,6 +1,6 @@
 (require [hylibtk [*]])
 (import [hylibtk [*]])
-;
+
 (tk root {:hoge "foo"  :title "title"})
 
 ;(tk root {:hoge "foo"  :title "title"})
