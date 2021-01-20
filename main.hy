@@ -1,7 +1,9 @@
 (require [hylibtk [*]])
 (import [hylibtk [*]])
+;
+(tk root {:hoge "foo"  :title "title"})
 
-(tk root {:title "tk"})
+;(tk root {:hoge "foo"  :title "title"})
 
 ;(tk root {} (frame frame)
 ;         (frame frame-second))
