@@ -5,16 +5,16 @@
         (except [e KeyError]
           ~default)))
 
-;(defmacro tk [name attr &rest body]
-;  `(do (setv ~name (Tk))
-;       (setv attr ~attr)
-;       (.title ~name (get-attr :title "tk"))
-;       (as-> ~name parent @body)))
-
-(defmacro tk [name attr]
+(defmacro tk [name attr &rest body]
   `(do (setv ~name (Tk))
        (setv attr ~attr)
-       (.title ~name (get-attr :title "tk"))))
+       (.title ~name (get-attr :title "tk"))
+       (as-> ~name parent @body)))
+
+;(defmacro tk [name attr]
+;  `(do (setv ~name (Tk))
+;       (setv attr ~attr)
+;       (.title ~name (get-attr :title "tk"))))
 
 ;(defmacro tk [name attr &rest body]
 ;  `(do (setv ~name (Tk))
