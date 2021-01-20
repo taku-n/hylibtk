@@ -1,7 +1,10 @@
+; This program makes an error although sometimes works correctly.
+; The error is "NameError: name 'hyx_Xcommercial_atXbody' is not defined".
+
 (require [hylibtk [*]])
 (import [hylibtk [*]])
 
-;(tk root {:title "foobar"} '())
+;(tk root {})
 
 (tk root {:hoge "foo"  :title "title"})
 
