@@ -1,12 +1,13 @@
+; Do these 3 lines of comment get this program run correctly?
 ; This program makes an error although sometimes works correctly.
 ; The error is "NameError: name 'hyx_Xcommercial_atXbody' is not defined".
 
 (require [hylibtk [*]])
 (import [hylibtk [*]])
 
-;(tk root {})
+(tk root {})
 
-(tk root {:hoge "foo"  :title "title"})
+;(tk root {:hoge "foo"  :title "title"})
 
 ;(tk root {:hoge "foo"  :title "title"})
 
@@ -36,4 +37,4 @@
 ;(assoc label :text "hello, world")
 ;;(setv (. label-second ["text"]) "hello, second")
 
-(root.mainloop)
+(.mainloop root)
