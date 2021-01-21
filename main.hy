@@ -1,14 +1,16 @@
-(import sys)
-(setv (. sys dont_write_bytecode) True)
-
-; Do these 3 lines of comment get this program run correctly?
-; This program makes an error although sometimes works correctly.
-; The error is "NameError: name 'hyx_Xcommercial_atXbody' is not defined".
-
 (require [hylibtk [*]])
 (import [hylibtk [*]])
 
-(tk root {})
+(tk root {} (frame frame {} (label label {}))
+            (frame frame-second {} (label label-second {:text "label-2nd"})))
+
+;(defn f [name]
+;  (global name)
+;  (setv name (Tk)))
+
+;(f 'root)
+
+;(tk root {} (frame frame {}))
 
 ;(tk root {:hoge "foo"  :title "title"})
 

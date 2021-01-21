@@ -9,29 +9,34 @@
   `(do (setv ~name (Tk))
        (setv attr ~attr)
        (.title ~name (get-attr :title "tk"))
-       (as-> ~name parent ~@body)))
+       (setv parent ~name)
+       ((fn [] ~@body))))
+
+;(defmacro tk [name attr &rest body]
+;  `(do (setv ~name (Tk))
+;       (setv attr ~attr)
+;       (.title ~name (get-attr :title "tk")))
+;       (as-> ~name parent ~@body)))
 
 ;(defmacro tk [name attr]
 ;  `(do (setv ~name (Tk))
 ;       (setv attr ~attr)
 ;       (.title ~name (get-attr :title "tk"))))
 
-;(defmacro tk [name attr &rest body]
-;  `(do (setv ~name (Tk))
-;       (setv attr ~attr)
-;       (.title ~name (get-attr :title "tk"))
-;       (as-> ~name parent @body)))
+(defmacro frame [name attr &rest body]
+  `(do (setv ~name (Frame parent))
+       (setv attr ~attr)
+       (.pack ~name :side TOP :expand True :fill BOTH)
+       ((fn [] (setv parent ~name)
+               ((fn [] ~@body))))))
 
-;(defmacro frame [name parent attr &rest body]
-;  `(do (setv ~name (Frame ~parent))
-;       (.pack ~name :side TOP :expand True :fill BOTH)
-;       (as-> ~name parent @body)
-;       ~parent))
+;(defmacro frame* [name parent attr &rest body]
 
-;(defmacro label [name parent attr]
-;  `(do (setv ~name (Label parent))
-;       (.pack ~name :side LEFT :expand True :fill BOTH)
-;       ~parent))
+(defmacro label [name attr]
+  `(do (setv ~name (Label parent))
+       (setv attr ~attr)
+       (.pack ~name :side LEFT :expand True :fill BOTH)
+       (setv (. ~name ["text"]) (get-attr :text "label"))))
 
 ;(defmacro label [name parent attr &rest body]
 ;  `(do ;(global ~name)
