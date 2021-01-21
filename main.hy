@@ -2,7 +2,7 @@
 (import [hylibtk [*]])
 
 (tk root {} (frame frame {} (label label {}))
-            (frame frame-second {} (label label-second {:text "label-2nd"})))
+            (frame frame-second {} (label label-second {:text "label-2nd"}) (label label-third {:text "label-3rd"})))
 
 ;(defn f [name]
 ;  (global name)
