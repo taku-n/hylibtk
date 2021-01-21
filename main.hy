@@ -1,3 +1,6 @@
+(import sys)
+(setv (. sys dont_write_bytecode) True)
+
 ; Do these 3 lines of comment get this program run correctly?
 ; This program makes an error although sometimes works correctly.
 ; The error is "NameError: name 'hyx_Xcommercial_atXbody' is not defined".
