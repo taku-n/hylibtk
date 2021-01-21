@@ -7,7 +7,7 @@
 
 (defmacro tk [name attr &rest body]
   `(do (setv ~name (Tk))
-       (setv attr ~attr)
+       (setv attr ~attr)  ; for get-attr
        (.title ~name (get-attr :title "tk"))
        (setv parent ~name)
        ((fn [] ~@body))))
@@ -25,7 +25,7 @@
 
 (defmacro frame [name attr &rest body]
   `(do (setv ~name (Frame parent))
-       (setv attr ~attr)
+       (setv attr ~attr)  ; for get-attr
        (.pack ~name :side TOP :expand True :fill BOTH)
        ((fn [] (setv parent ~name)
                ((fn [] ~@body))))))
@@ -34,7 +34,7 @@
 
 (defmacro label [name attr]
   `(do (setv ~name (Label parent))
-       (setv attr ~attr)
+       (setv attr ~attr)  ; for get-attr
        (.pack ~name :side LEFT :expand True :fill BOTH)
        (setv (. ~name ["text"]) (get-attr :text "label"))))
 
