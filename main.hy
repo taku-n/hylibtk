@@ -9,13 +9,18 @@
     (frame frame2 {}
       (label label {:text "label"}))
     (frame frame3 {}
-      (button* button frame3 {}))))
+      (button button
+        {:command
+          (fn []
+            (global x)
+            (setv x (+ x 1))
+            (setv (. label1 ["text"]) x))}))))
 
-(setv (. button ["command"])
-      (fn []
-        (global x)
-        (setv x (+ x 1))
-        (setv (. label1 ["text"]) x)))
+;(setv (. button ["command"])
+;      (fn []
+;        (global x)
+;        (setv x (+ x 1))
+;        (setv (. label1 ["text"]) x)))
 
 ;(tk root {}
 ;  (frame frame {}

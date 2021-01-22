@@ -41,7 +41,8 @@
        (setv ~name (Button parent))
        (setv attr ~attr)  ; for get-attr
        (.pack ~name :side (get-attr :side LEFT) :expand True :fill BOTH)
-       (setv (. ~name ["text"]) (get-attr :text "button"))))
+       (setv (. ~name ["text"]) (get-attr :text "button"))
+       (setv (. ~name ["command"]) (get-attr :command (fn [])))))
 
 (defmacro button* [name parent attr]
   `(do (setv parent ~parent)
