@@ -30,7 +30,9 @@
        (setv ~name (Label parent))
        (setv attr ~attr)  ; for get-attr
        (.pack ~name :side (get-attr :side LEFT) :expand True :fill BOTH)
-       (setv (. ~name ["text"]) (get-attr :text "label"))))
+       (setv (. ~name ["text"]) (get-attr :text "label"))
+       (setv (. ~name ["fg"]) (get-attr :fg "black"))
+       (setv (. ~name ["bg"]) (get-attr :bg "#F0F0F0"))))
 
 (defmacro label* [name parent attr]
   `(do (setv parent ~parent)

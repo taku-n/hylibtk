@@ -5,7 +5,7 @@
 
 (tk root {}
   (frame frame {}
-    (label label1 {:side RIGHT  :text x})
+    (label label1 {:side RIGHT  :text x  :fg "red"  :bg "white"})
     (frame frame2 {}
       (label label {:text "label"}))
     (frame frame3 {}
