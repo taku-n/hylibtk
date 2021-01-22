@@ -8,6 +8,7 @@ Before starting development in Windows, set an environment variable:
 
 hylibtk is a library of Hy for Tkinter.
 
+example/window.hy:
 ```
 (require [hylibtk [*]])
 (import [hylibtk [*]])
@@ -16,3 +17,4 @@ hylibtk is a library of Hy for Tkinter.
 
 (.mainloop root)
 ```
+![window.hy](img/window.png)
