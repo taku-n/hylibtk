@@ -1,8 +1,32 @@
 (require [hylibtk [*]])
 (import [hylibtk [*]])
 
-(tk root {} (frame frame {} (label label {}))
-            (frame frame-second {} (label label-second {:text "label-2nd"}) (label label-third {:text "label-3rd"})))
+(setv x 0)
+
+(tk root {}
+  (frame frame {}
+    (label label1 {:side RIGHT  :text x})
+    (frame frame2 {}
+      (label label {:text "label"}))
+    (frame frame3 {}
+      (button* button frame3 {}))))
+
+(setv (. button ["command"])
+      (fn []
+        (global x)
+        (setv x (+ x 1))
+        (setv (. label1 ["text"]) x)))
+
+;(tk root {}
+;  (frame frame {}
+;    (label label1 {:text "label1"})
+;    (frame frame2
+;      (label label {:text "label"}))
+;    (frame frame3
+;      (button* button frame3 {})))
+;            (frame frame-second {} (label label-second {:text "label-2nd"}) (label label-third {:text "label-3rd"})))
+
+;(setv (. label-second ["text"]) "hoge")
 
 ;(defn f [name]
 ;  (global name)
