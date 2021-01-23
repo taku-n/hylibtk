@@ -2,6 +2,6 @@
 (import [hylibtk [*]])
 
 (tk root {}
-  (label hello {:text "hello, world"  :fg "red"}))
+  (button hello {:text "hello, world"}))
 
 (.mainloop root)
