@@ -2,7 +2,8 @@
 
 Before starting development in Windows, set an environment variable:  
 `PYTHONDONTWRITEBYTECODE` `""`  
-(In Linux, this might not work fine. That's why I don't support Linux).
+(In Linux, this might not work fine. That's why I don't support Linux).  
+For more information, see https://github.com/hylang/hy/issues/1324.
 
 ***
 
