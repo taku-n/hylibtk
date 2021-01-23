@@ -18,3 +18,15 @@ example/window.hy:
 (.mainloop root)
 ```
 ![window.hy](img/window.png)
+
+example/label.hy:
+```
+(require [hylibtk [*]])
+(import [hylibtk [*]])
+
+(tk root {}
+  (label hello {:text "hello, world"}))
+
+(.mainloop root)
+```
+![label.hy](img/label.png)
