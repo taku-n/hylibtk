@@ -1,52 +1,63 @@
 (import [tkinter [*]])
 
-(defmacro get-attr [attr default]
-  `(try (. attr [~attr])
-        (except [e KeyError]
-          ~default)))
+(defmacro get-attr [attr]
+  `(try (. attrs [~attr])
+        (except [e KeyError] None)))
 
-(defmacro tk [name attr &rest body]
-  `(do (global ~name)
-       (setv ~name (Tk))
-       (setv attr ~attr)  ; for get-attr
-       (.title ~name (get-attr :title "tk"))
-       (setv parent ~name)
+(defmacro get-attr-or-default [attr default]
+  `(try (. attrs [~attr])
+        (except [e KeyError] ~default)))
+
+(defmacro set-attr [attr setting]
+  `(if ~setting (setv ~attr ~setting)))
+
+(defmacro set-attrs [objname attrs]
+  `(for [k ~attrs] (set-attr (. ~objname [(name k)]) (get-attr k)))
+
+(defmacro tk [objname attrs &rest body]
+  `(do (global ~objname)
+       (setv ~objname (Tk))
+       (setv attrs ~attrs)  ; for get-attr and get-attr-or-default
+       (.title ~objname (get-attr-or-default :title "tk"))
+       (setv parent ~objname)
        ((fn [] ~@body))))
 
-(defmacro frame [name attr &rest body]
-  `(do (global ~name)
-       (setv ~name (Frame parent))
-       (setv attr ~attr)  ; for get-attr
-       (.pack ~name :side (get-attr :side TOP) :expand True :fill BOTH)
-       ((fn [] (setv parent ~name)
+(defmacro frame [objname attrs &rest body]
+  `(do (global ~objname)
+       (setv ~objname (Frame parent))
+       (setv attrs ~attrs)  ; for get-attr and get-attr-or-default
+       (.pack ~objname :side (get-attr-or-default :side TOP) :expand True :fill BOTH)
+       ((fn [] (setv parent ~objname)
                ((fn [] ~@body))))))
 
-(defmacro frame* [name parent attr &rest body]
+(defmacro frame* [objname parent attrs &rest body]
   `(do (setv parent ~parent)
-       (frame ~name ~attr ~@body)))
+       (frame ~objname ~attrs ~@body)))
 
-(defmacro label [name attr]
-  `(do (global ~name)
-       (setv ~name (Label parent))
-       (setv attr ~attr)  ; for get-attr
-       (.pack ~name :side (get-attr :side LEFT) :expand True :fill BOTH)
-       (setv (. ~name ["text"]) (get-attr :text "label"))
-       (setv (. ~name ["fg"]) (get-attr :fg "black"))
-       (setv (. ~name ["bg"]) (get-attr :bg "#F0F0F0"))))
+(defmacro label [objname attrs]
+  `(do (global ~objname)
+       (setv ~objname (Label parent))
+       (setv attrs ~attrs)  ; for get-attr and get-attr-or-default
+       (.pack ~objname :side (get-attr-or-default :side LEFT) :expand True :fill BOTH)
+       (set-attrs ~objname ~attrs)
+       (set-attr (. ~name ["text"]) (get-attr :text))
+       (set-attr (. ~name ["fg"]) (get-attr :fg))
+       (set-attr (. ~name ["bg"]) (get-attr :bg))
+       (set-attr (. ~name ["font"]) (get-attr :font))))
 
 (defmacro label* [name parent attr]
   `(do (setv parent ~parent)
        (label ~name ~attr)))
 
-(defmacro button [name attr]
+#_(defmacro button [name attr]
   `(do (global ~name)
        (setv ~name (Button parent))
-       (setv attr ~attr)  ; for get-attr
+       (setv attr ~attr)  ; for get-attr and get-attr-or-default
        (.pack ~name :side (get-attr :side LEFT) :expand True :fill BOTH)
        (setv (. ~name ["text"]) (get-attr :text "button"))
        (setv (. ~name ["command"]) (get-attr :command (fn [])))))
 
-(defmacro button* [name parent attr]
+#_(defmacro button* [name parent attr]
   `(do (setv parent ~parent)
        (button ~name ~attr)))
 
