@@ -1,4 +1,5 @@
 (import [tkinter [*]])
+(import [tkinter.ttk :as ttk])
 
 (defmacro get-attr [attr attrs]
   `(try (. ~attrs [~attr])
@@ -52,3 +53,13 @@
 (defmacro button* [objname parent attrs]
   `(do (setv parent ~parent)
        (button ~objname ~attrs)))
+
+(defmacro combobox [objname attrs]
+  `(do (global ~objname)
+       (setv ~objname (.Combobox ttk parent))
+       (.pack ~objname :side (get-attr-or-default :side LEFT ~attrs) :expand True :fill BOTH)
+       (set-attrs ~objname ~attrs)))
+
+(defmacro combobox* [objname parent attrs]
+  `(do (setv parent ~parent)
+       (combobox ~objname ~attrs)))

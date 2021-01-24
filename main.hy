@@ -7,7 +7,7 @@
 
 (tk root {}
   (frame frame {}
-    (label label1 {:side RIGHT  :text x  :fg "red"  :bg "white"})
+    (combobox* combobox frame {})
     (frame frame2 {}
       (label label {:text "label"}))
     (frame frame3 {}
