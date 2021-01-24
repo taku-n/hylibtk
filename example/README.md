@@ -1,7 +1,7 @@
-Open Windows PowerShell and run:
+Open Command Prompt and run:
 
 ```
-> cp window.hy ..
-> cd ..
-> hy window.hy
+>copy window.hy ..
+>cd ..
+>hy window.hy
 ```
