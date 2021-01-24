@@ -1,6 +1,8 @@
 (require [hylibtk [*]])
 (import [hylibtk [*]])
 
+(print "Starting...")
+
 (setv x 0)
 
 (tk root {}
