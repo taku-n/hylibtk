@@ -2,7 +2,12 @@
 (import [hylibtk [*]])
 
 (tk root {}
-  (tk-label* label root {:text "label"}))
+  (frame* frame1 root {}
+    (label* label1 frame1 {:text "label1"})
+    (tk-label* label2 frame1 {:text "label2"})
+  (tk-frame* frame2 root {}
+    (button* button1 frame2 {:text "button1"})
+    (tk-button* button2 frame2 {:text "button2"}))))
 
 ;(print "Starting...")
 ;

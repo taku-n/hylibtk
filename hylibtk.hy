@@ -108,16 +108,9 @@
 (define-widget label .Label label*)
 (tk-define-widget tk-label Label tk-label*)
 
-;(defmacro button [objname attrs]
-;  `(do (global ~objname)
-;       (setv ~objname (Button parent))
-;       (.pack ~objname :side (get-attr-or-default :side LEFT ~attrs) :expand True :fill BOTH)
-;       (set-attrs ~objname ~attrs)))
-;
-;(defmacro button* [objname parent attrs]
-;  `(do (setv parent ~parent)
-;       (button ~objname ~attrs)))
-;
+(define-widget button .Button button*)
+(tk-define-widget tk-button Button tk-button*)
+
 ;(defmacro combobox [objname attrs]
 ;  `(do (global ~objname)
 ;       (setv ~objname (.Combobox ttk parent))
