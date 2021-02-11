@@ -1,22 +1,25 @@
 (require [hylibtk [*]])
 (import [hylibtk [*]])
 
-(print "Starting...")
+(tk root {:title "Tiny"  :geometry "200x200"})
+;(tk root {})
 
-(setv x 0)
-
-(tk root {}
-  (frame frame {}
-    (combobox* combobox frame {})
-    (frame frame2 {}
-      (label label {:text "label"}))
-    (frame frame3 {}
-      (button button
-        {:command
-          (fn []
-            (global x)
-            (setv x (+ x 1))
-            (setv (. label1 ["text"]) x))}))))
+;(print "Starting...")
+;
+;(setv x 0)
+;
+;(tk root {}
+;  (frame frame {}
+;    (combobox* combobox frame {})
+;    (frame frame2 {}
+;      (label label {:text "label"}))
+;    (frame frame3 {}
+;      (button button
+;        {:command
+;          (fn []
+;            (global x)
+;            (setv x (+ x 1))
+;            (setv (. label1 ["text"]) x))}))))
 
 ;(setv (. button ["command"])
 ;      (fn []

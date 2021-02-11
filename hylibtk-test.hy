@@ -8,10 +8,10 @@
            None))
 
 ; get-attr-or-default
-(assert (= (get-attr-or-default :foo "quux" {:foo "hoge"  :bar "fuga"  :baz "piyo"})
+(assert (= (get-attr-or-default :foo {:foo "hoge"  :bar "fuga"  :baz "piyo"} "hogehoge")
            "hoge"))
-(assert (= (get-attr-or-default :qux "quux" {:foo "hoge"  :bar "fuga"  :baz "piyo"})
-           "quux"))
+(assert (= (get-attr-or-default :qux {:foo "hoge"  :bar "fuga"  :baz "piyo"} "hogehoge")
+           "hogehoge"))
 
 ; set-attr
 (assert (= (do (setv d {"foo" "hoge"  "bar" "fuga"  "baz" "piyo"})
