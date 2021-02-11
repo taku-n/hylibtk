@@ -2,7 +2,7 @@
 (import [hylibtk [*]])
 
 (tk root {}
-  (tk-frame* frame root {:relief "raised"}))
+  (tk-label* label root {:text "label"}))
 
 ;(print "Starting...")
 ;
