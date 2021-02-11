@@ -63,10 +63,12 @@
                ((fn [] ~@body))))))
 
 (defmacro frame* [objname parent attrs &rest body]
+"Explicit parent."
   `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
        (frame ~objname ~attrs ~@body)))
 
 (defmacro tk-frame [objname attrs &rest body]
+"Not themed."
   `(do (global ~objname)
        (setv ~objname (Frame parent))
        (pack ~objname ~attrs {:side TOP  :expand True  :fill BOTH})
@@ -75,32 +77,36 @@
                ((fn [] ~@body))))))
 
 (defmacro tk-frame* [objname parent attrs &rest body]
+"Not themed. Explicit parent."
   `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
        (tk-frame ~objname ~attrs ~@body)))
 
-;(defmacro define-widget [widget-name
-;  `(defmacro ~widget-name [objname attrs]
-;(defmacro tk-define-widget
+; Not Confirmed:
+; Outer macro runs first.
+(defmacro define-widget [widget-name init-function widget-name*]
+"widget-name* is a macro to set parent explicitly."
+  `(do (defmacro ~widget-name [objname attrs]
+         `(do (global ~objname)
+              (setv ~objname (~'~init-function ttk parent))
+              (pack ~objname ~attrs {:side LEFT  :expand True  :fill BOTH})
+              (set-attrs ~objname ~attrs)))
+       (defmacro ~widget-name* [objname parent attrs]
+         `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
+              (~'~widget-name ~objname ~attrs)))))
 
-(defmacro label [objname attrs]
-  `(do (global ~objname)
-       (setv ~objname (.Label ttk parent))
-       (pack ~objname ~attrs {:side LEFT  :expand True  :fill BOTH})
-       (set-attrs ~objname ~attrs)))
+(defmacro tk-define-widget [widget-name init-function widget-name*]
+"Not themed. widget-name* is a macro to set parent explicitly."
+  `(do (defmacro ~widget-name [objname attrs]
+         `(do (global ~objname)
+              (setv ~objname (~'~init-function parent))
+              (pack ~objname ~attrs {:side LEFT  :expand True  :fill BOTH})
+              (set-attrs ~objname ~attrs)))
+       (defmacro ~widget-name* [objname parent attrs]
+         `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
+              (~'~widget-name ~objname ~attrs)))))
 
-(defmacro label* [objname parent attrs]
-  `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
-       (label ~objname ~attrs)))
-
-(defmacro tk-label [objname attrs]
-  `(do (global ~objname)
-       (setv ~objname (Label parent))
-       (pack ~objname ~attrs {:side LEFT  :expand True  :fill BOTH})
-       (set-attrs ~objname ~attrs)))
-
-(defmacro tk-label* [objname parent attrs]
-  `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
-       (tk-label ~objname ~attrs)))
+(define-widget label .Label label*)
+(tk-define-widget tk-label Label tk-label*)
 
 ;(defmacro button [objname attrs]
 ;  `(do (global ~objname)
