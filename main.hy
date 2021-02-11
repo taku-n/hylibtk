@@ -1,8 +1,8 @@
 (require [hylibtk [*]])
 (import [hylibtk [*]])
 
-(tk root {:title "Tiny"  :geometry "200x200"})
-;(tk root {})
+(tk root {}
+  (tk-frame* frame root {:relief "raised"}))
 
 ;(print "Starting...")
 ;

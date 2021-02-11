@@ -54,25 +54,30 @@
        (setv parent ~objname)
        ((fn [] ~@body))))
 
-;(defmacro frame [objname attrs &rest body]
-;  `(do (global ~objname)
-;       (setv ~objname (.Frame ttk parent))
-;       (pack ~objname ~attrs {:side TOP  :expand True  :fill BOTH})
-;       (set-attrs ~objname ~attrs)
-;       ((fn [] (setv parent ~objname)
-;               ((fn [] ~@body))))))
+(defmacro frame [objname attrs &rest body]
+  `(do (global ~objname)
+       (setv ~objname (.Frame ttk parent))
+       (pack ~objname ~attrs {:side TOP  :expand True  :fill BOTH})
+       (set-attrs ~objname ~attrs)
+       ((fn [] (setv parent ~objname)
+               ((fn [] ~@body))))))
 
-;(defmacro frame [objname attrs &rest body]
-;  `(do (global ~objname)
-;       (setv ~objname (Frame parent))
-;       (.pack ~objname :side (get-attr-or-default :side TOP ~attrs) :expand True :fill BOTH)
-;       ((fn [] (setv parent ~objname)
-;               ((fn [] ~@body))))))
+(defmacro frame* [objname parent attrs &rest body]
+  `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
+       (frame ~objname ~attrs ~@body)))
 
-;(defmacro frame* [objname parent attrs &rest body]
-;  `(do (setv parent ~parent)
-;       (frame ~objname ~attrs ~@body)))
-;
+(defmacro tk-frame [objname attrs &rest body]
+  `(do (global ~objname)
+       (setv ~objname (Frame parent))
+       (pack ~objname ~attrs {:side TOP  :expand True  :fill BOTH})
+       (set-attrs ~objname ~attrs)
+       ((fn [] (setv parent ~objname)
+               ((fn [] ~@body))))))
+
+(defmacro tk-frame* [objname parent attrs &rest body]
+  `(do (setv parent ~parent)  ; Inside tk macro, setv must set the same value as what it was.
+       (frame ~objname ~attrs ~@body)))
+
 ;(defmacro label [objname attrs]
 ;  `(do (global ~objname)
 ;       (setv ~objname (Label parent))
